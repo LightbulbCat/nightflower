@@ -1,0 +1,10 @@
+#! /bin/bash
+
+SRCDIR=$1
+OUTDIR=$2
+
+for src in `ls $SRCDIR/*.MOV`; do
+	out=$OUTDIR/`basename $src`
+	echo "cute! > $src $out"
+	ffmpeg -i $src -loglevel panic -b:v 1M -vf scale=960:-1 $out
+done

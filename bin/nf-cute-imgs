@@ -1,0 +1,12 @@
+#! /bin/bash
+
+SRCDIR=$1
+OUTDIR=$2
+
+echo $SRCDIR $OUTDIR
+
+for src in `ls $SRCDIR/*.JPG`; do
+	out=$OUTDIR/`basename $src`
+	echo "cute! > $src $out"
+	convert $src -resize 25% $out
+done

@@ -1,0 +1,32 @@
+#! /bin/bash
+
+SRCDIR=/Volumes/KISS/DCIM/100CANON
+
+cd `dirname $0`
+PRJROOT=..
+
+DATE=`date +%Y-%m-%d`
+OUTDIR=$PRJROOT/$DATE
+TMPDIR=$OUTDIR.tmp
+THUMBDIR=$PRJROOT/thumbnails
+
+echo
+echo "[nightflower] import files from $SRCDIR"
+mkdir $TMPDIR
+cp -v $SRCDIR/*.JPG $TMPDIR
+cp -v $SRCDIR/*.MOV $TMPDIR
+
+echo
+echo "[nightflower] cutify images"
+./nf-cute-imgs $TMPDIR $THUMBDIR
+
+echo
+echo "[nightflower] cutify movies"
+./nf-cute-movs $TMPDIR $THUMBDIR
+
+echo
+echo "[nightflower] store and clean..."
+mkdir $OUTDIR
+mv $TMPDIR/* $OUTDIR
+rmdir $TMPDIR
+
